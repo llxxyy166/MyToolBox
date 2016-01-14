@@ -15,6 +15,8 @@
 		39456CDC1C480BC500B4EE47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39456CDA1C480BC500B4EE47 /* LaunchScreen.storyboard */; };
 		39456CE71C480BC600B4EE47 /* Convenient_CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CE61C480BC600B4EE47 /* Convenient_CalculatorTests.m */; };
 		39456CF21C480BC600B4EE47 /* Convenient_CalculatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CF11C480BC600B4EE47 /* Convenient_CalculatorUITests.m */; };
+		39456D011C480C5500B4EE47 /* CalculatorCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39456D001C480C5500B4EE47 /* CalculatorCore.mm */; };
+		39456D051C480CD000B4EE47 /* Eval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39456D031C480CD000B4EE47 /* Eval.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		39456CED1C480BC600B4EE47 /* Convenient CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Convenient CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39456CF11C480BC600B4EE47 /* Convenient_CalculatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Convenient_CalculatorUITests.m; sourceTree = "<group>"; };
 		39456CF31C480BC600B4EE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39456CFF1C480C5500B4EE47 /* CalculatorCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalculatorCore.h; path = Model/CalculatorCore.h; sourceTree = "<group>"; };
+		39456D001C480C5500B4EE47 /* CalculatorCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CalculatorCore.mm; path = Model/CalculatorCore.mm; sourceTree = "<group>"; };
+		39456D031C480CD000B4EE47 /* Eval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Eval.cpp; path = Model/Eval.cpp; sourceTree = "<group>"; };
+		39456D041C480CD000B4EE47 /* Eval.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Eval.hpp; path = Model/Eval.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +107,7 @@
 		39456CCB1C480BC500B4EE47 /* Convenient Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				39456CCF1C480BC500B4EE47 /* AppDelegate.h */,
-				39456CD01C480BC500B4EE47 /* AppDelegate.m */,
+				39456D021C480C5C00B4EE47 /* Model */,
 				39456CD21C480BC500B4EE47 /* ViewController.h */,
 				39456CD31C480BC500B4EE47 /* ViewController.m */,
 				39456CD51C480BC500B4EE47 /* Main.storyboard */,
@@ -117,6 +122,8 @@
 		39456CCC1C480BC500B4EE47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39456CCF1C480BC500B4EE47 /* AppDelegate.h */,
+				39456CD01C480BC500B4EE47 /* AppDelegate.m */,
 				39456CCD1C480BC500B4EE47 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +145,17 @@
 				39456CF31C480BC600B4EE47 /* Info.plist */,
 			);
 			path = "Convenient CalculatorUITests";
+			sourceTree = "<group>";
+		};
+		39456D021C480C5C00B4EE47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39456CFF1C480C5500B4EE47 /* CalculatorCore.h */,
+				39456D001C480C5500B4EE47 /* CalculatorCore.mm */,
+				39456D031C480CD000B4EE47 /* Eval.cpp */,
+				39456D041C480CD000B4EE47 /* Eval.hpp */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +225,7 @@
 				TargetAttributes = {
 					39456CC81C480BC500B4EE47 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = MD3RJAU54S;
 					};
 					39456CE11C480BC500B4EE47 = {
 						CreatedOnToolsVersion = 7.2;
@@ -272,7 +291,9 @@
 			files = (
 				39456CD41C480BC500B4EE47 /* ViewController.m in Sources */,
 				39456CD11C480BC500B4EE47 /* AppDelegate.m in Sources */,
+				39456D011C480C5500B4EE47 /* CalculatorCore.mm in Sources */,
 				39456CCE1C480BC500B4EE47 /* main.m in Sources */,
+				39456D051C480CD000B4EE47 /* Eval.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +434,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Convenient Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lei.Convenient-Calculator";
@@ -424,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Convenient Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lei.Convenient-Calculator";
