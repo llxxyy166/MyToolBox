@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic) NSString *display;
 @property (nonatomic) BOOL displayingResult;
+@property (nonatomic) NSInteger openParenthesis;
 
 
 @end
@@ -28,12 +29,7 @@
 
 - (void)setDisplay:(NSString *)display {
     _display = display;
-    if ([display isEqualToString:@""]) {
-        self.resultLabel.text = @"0";
-    }
-    else {
     self.resultLabel.text = display;
-    }
 }
 
 - (BOOL)isOperator: (NSString *)string {
@@ -48,11 +44,21 @@
 - (IBAction)inputsButtonAction:(UIButton *)sender {
     NSString *current = sender.currentTitle;
     if (![self isOperator:current] && self.displayingResult) {
+        self.display = @"0";
+    }
+    if (![self isOperator:current] && [self.display isEqualToString:@"0"]) {
         self.display = @"";
     }
-    self.displayingResult = NO;
-    self.display = [self.display stringByAppendingString:current];
-    //NSLog(@"%hu", [sender.currentTitle characterAtIndex:0]);
+    if ([current isEqualToString:@"("]) {
+        self.openParenthesis ++;
+    }
+    if (![current isEqualToString:@")"] || self.openParenthesis) {
+        self.displayingResult = NO;
+        self.display = [self.display stringByAppendingString:current];
+        if ([current isEqualToString:@")"]) {
+            self.openParenthesis--;
+        }
+    }
 }
 - (IBAction)enterAction:(UIButton *)sender {
     NSString *result = [self.core calByExpressionString:self.display];
@@ -60,17 +66,16 @@
     self.displayingResult = YES;
 }
 - (IBAction)cancelAction:(UIButton *)sender {
-    self.display = @"";
+    self.display = @"0";
+    self.displayingResult = NO;
+    self.openParenthesis = 0;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.display = @"";
+    self.display = @"0";
     self.displayingResult = NO;
-//    NSString *test = [NSString stringWithFormat:@"5+3.2*2-2*(1+2)"];
-//    NSString *result = [self.core calByExpressionString:test];
-//    NSLog(@"%@", test);
-//    NSLog(@"%@", result);
+    self.openParenthesis = 0;
     // Do any additional setup after loading the view, typically from a nib.
 }
 

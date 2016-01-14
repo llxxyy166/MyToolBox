@@ -48,8 +48,12 @@ bool isOperationSymbol(char c) {
 double evalSurfix(vector<string> surfix) {
     stack<double> workingStack;
     for (int i = 0; i < surfix.size(); i++) {
+        std::cout << surfix[i];
+        if (surfix[i] == "(") {
+            return INT32_MAX;
+        }
         if (surfix[i] == "+" || surfix[i] == "-" || surfix[i] == "*" || surfix[i] == "/") {
-            if ((workingStack.size() < 2 && surfix[i] != "-" ) || !workingStack.size()) {
+            if (workingStack.size() < 2) {
                 return INT32_MAX;
             }
             double o1 = workingStack.top();
@@ -105,11 +109,6 @@ string eval(string s) {
             if (number.length()) {
                 suffixExpression.push_back(number);
                 number = "";
-            }
-        }
-        if (!workingStack.empty()) {
-            if  (s[i] == '-' && workingStack.top() == "(") {
-                suffixExpression.push_back("0");
             }
         }
         if (isOperationSymbol(s[i])) {
