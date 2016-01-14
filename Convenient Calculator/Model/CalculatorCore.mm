@@ -21,7 +21,6 @@
             expressionString = [expressionString stringByReplacingCharactersInRange:NSMakeRange(i, 1) withString:@"/"];
         }
     }
-    NSLog(@"%@", expressionString);
     std::string cppExpression([expressionString UTF8String]);
     std::string cppStringResult = eval(cppExpression);
     NSString *result = [NSString stringWithUTF8String:cppStringResult.c_str()];

@@ -48,8 +48,10 @@ bool isOperationSymbol(char c) {
 double evalSurfix(vector<string> surfix) {
     stack<double> workingStack;
     for (int i = 0; i < surfix.size(); i++) {
-        std::cout << surfix[i];
         if (surfix[i] == "(") {
+            return INT32_MAX;
+        }
+        if (surfix[i][surfix[i].size() - 1] == '.') {
             return INT32_MAX;
         }
         if (surfix[i] == "+" || surfix[i] == "-" || surfix[i] == "*" || surfix[i] == "/") {
@@ -58,14 +60,8 @@ double evalSurfix(vector<string> surfix) {
             }
             double o1 = workingStack.top();
             workingStack.pop();
-            double o2;
-            if (workingStack.size()) {
-                o2 = workingStack.top();
-                workingStack.pop();
-            }
-            else {
-                o2 = 0;
-            }
+            double o2 = workingStack.top();
+            workingStack.pop();
             char op = surfix[i][0];
             switch (op) {
                 case '+' :
@@ -126,6 +122,9 @@ string eval(string s) {
         }
         if (s[i] == '(') {
             workingStack.push(c);
+            if (i < s.length() - 1 && s[i + 1] == '-') {
+                suffixExpression.push_back("0");
+            }
         }
         if (s[i] == ')') {
             while (!workingStack.empty()) {
@@ -145,6 +144,9 @@ string eval(string s) {
         suffixExpression.push_back(workingStack.top());
         workingStack.pop();
     }
+//    for (int i = 0; i <suffixExpression.size(); i++) {
+//        std::cout << suffixExpression[i];
+//    }
     double result = evalSurfix(suffixExpression);
     if (result == INT32_MAX) {
         return "error";

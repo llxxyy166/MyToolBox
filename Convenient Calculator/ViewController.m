@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic) NSString *display;
 @property (nonatomic) BOOL displayingResult;
+@property (nonatomic) BOOL newNumber;
 @property (nonatomic) NSInteger openParenthesis;
 
 
@@ -41,8 +42,30 @@
     }
     return NO;
 }
+
+- (BOOL) isNumber: (NSString *)string {
+    NSString *numberString = @"0123456789";
+    return [numberString containsString:string];
+}
+
+- (void)clear {
+    self.display = @"0";
+    self.displayingResult = NO;
+    self.openParenthesis = 0;
+    self.newNumber = YES;
+}
+
 - (IBAction)inputsButtonAction:(UIButton *)sender {
     NSString *current = sender.currentTitle;
+    if ([current isEqualToString:@")"] && !self.openParenthesis) {
+        return;
+    }
+    if ([current isEqualToString:@"."] && !self.newNumber) {
+        return;
+    }
+    if ([self.display isEqualToString:@"error"]) {
+        [self clear];
+    }
     if (![self isOperator:current] && self.displayingResult) {
         self.display = @"0";
     }
@@ -52,30 +75,31 @@
     if ([current isEqualToString:@"("]) {
         self.openParenthesis ++;
     }
-    if (![current isEqualToString:@")"] || self.openParenthesis) {
-        self.displayingResult = NO;
-        self.display = [self.display stringByAppendingString:current];
-        if ([current isEqualToString:@")"]) {
-            self.openParenthesis--;
-        }
+    self.displayingResult = NO;
+    self.display = [self.display stringByAppendingString:current];
+    if ([current isEqualToString:@")"]) {
+        self.openParenthesis--;
+    }
+    if (![self isNumber:current]) {
+        self.newNumber = YES;
+    }
+    if ([current isEqualToString:@"."]) {
+        self.newNumber = NO;
     }
 }
 - (IBAction)enterAction:(UIButton *)sender {
     NSString *result = [self.core calByExpressionString:self.display];
     self.display = result;
     self.displayingResult = YES;
+    self.newNumber = YES;
 }
 - (IBAction)cancelAction:(UIButton *)sender {
-    self.display = @"0";
-    self.displayingResult = NO;
-    self.openParenthesis = 0;
+    [self clear];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.display = @"0";
-    self.displayingResult = NO;
-    self.openParenthesis = 0;
+    [self clear];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
