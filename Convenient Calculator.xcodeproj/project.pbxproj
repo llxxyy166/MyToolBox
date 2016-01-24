@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391C79DE1C4EBC0F00CAE752 /* Yahoo.m in Sources */ = {isa = PBXBuildFile; fileRef = 391C79DD1C4EBC0F00CAE752 /* Yahoo.m */; };
+		391C79F21C4F0F2400CAE752 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391C79F11C4F0F2400CAE752 /* CollectionViewController.m */; };
+		391C79F81C4F168200CAE752 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391C79F71C4F168200CAE752 /* CollectionViewCell.m */; };
+		391C79FE1C4F3D0400CAE752 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391C79FD1C4F3D0400CAE752 /* TableViewController.m */; };
 		39456CCE1C480BC500B4EE47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CCD1C480BC500B4EE47 /* main.m */; };
 		39456CD11C480BC500B4EE47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CD01C480BC500B4EE47 /* AppDelegate.m */; };
 		39456CD41C480BC500B4EE47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CD31C480BC500B4EE47 /* ViewController.m */; };
@@ -37,6 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		391C79DC1C4EBC0F00CAE752 /* Yahoo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Yahoo.h; path = Yahoo/Yahoo.h; sourceTree = "<group>"; };
+		391C79DD1C4EBC0F00CAE752 /* Yahoo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Yahoo.m; path = Yahoo/Yahoo.m; sourceTree = "<group>"; };
+		391C79E01C4ED2DE00CAE752 /* YahooKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YahooKey.h; path = Yahoo/YahooKey.h; sourceTree = "<group>"; };
+		391C79F01C4F0F2400CAE752 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		391C79F11C4F0F2400CAE752 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		391C79F61C4F168200CAE752 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		391C79F71C4F168200CAE752 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		391C79FC1C4F3D0400CAE752 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		391C79FD1C4F3D0400CAE752 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		39456CC91C480BC500B4EE47 /* Convenient Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Convenient Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39456CCD1C480BC500B4EE47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		39456CCF1C480BC500B4EE47 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,9 +97,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391C79DF1C4EBC1500CAE752 /* Yahoo */ = {
+			isa = PBXGroup;
+			children = (
+				391C79E01C4ED2DE00CAE752 /* YahooKey.h */,
+				391C79DC1C4EBC0F00CAE752 /* Yahoo.h */,
+				391C79DD1C4EBC0F00CAE752 /* Yahoo.m */,
+			);
+			name = Yahoo;
+			sourceTree = "<group>";
+		};
+		391C79E21C4EDF5300CAE752 /* CalculatorVC */ = {
+			isa = PBXGroup;
+			children = (
+				39456CD21C480BC500B4EE47 /* ViewController.h */,
+				39456CD31C480BC500B4EE47 /* ViewController.m */,
+			);
+			name = CalculatorVC;
+			sourceTree = "<group>";
+		};
+		391C79E31C4EDF6600CAE752 /* WeatherVC */ = {
+			isa = PBXGroup;
+			children = (
+				391C79F01C4F0F2400CAE752 /* CollectionViewController.h */,
+				391C79F11C4F0F2400CAE752 /* CollectionViewController.m */,
+				391C79F61C4F168200CAE752 /* CollectionViewCell.h */,
+				391C79F71C4F168200CAE752 /* CollectionViewCell.m */,
+				391C79FC1C4F3D0400CAE752 /* TableViewController.h */,
+				391C79FD1C4F3D0400CAE752 /* TableViewController.m */,
+			);
+			name = WeatherVC;
+			sourceTree = "<group>";
+		};
 		39456CC01C480BC500B4EE47 = {
 			isa = PBXGroup;
 			children = (
+				391C79DF1C4EBC1500CAE752 /* Yahoo */,
 				39456CCB1C480BC500B4EE47 /* Convenient Calculator */,
 				39456CE51C480BC500B4EE47 /* Convenient CalculatorTests */,
 				39456CF01C480BC600B4EE47 /* Convenient CalculatorUITests */,
@@ -107,9 +153,9 @@
 		39456CCB1C480BC500B4EE47 /* Convenient Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				391C79E31C4EDF6600CAE752 /* WeatherVC */,
+				391C79E21C4EDF5300CAE752 /* CalculatorVC */,
 				39456D021C480C5C00B4EE47 /* Model */,
-				39456CD21C480BC500B4EE47 /* ViewController.h */,
-				39456CD31C480BC500B4EE47 /* ViewController.m */,
 				39456CD51C480BC500B4EE47 /* Main.storyboard */,
 				39456CD81C480BC500B4EE47 /* Assets.xcassets */,
 				39456CDA1C480BC500B4EE47 /* LaunchScreen.storyboard */,
@@ -289,10 +335,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391C79DE1C4EBC0F00CAE752 /* Yahoo.m in Sources */,
+				391C79F21C4F0F2400CAE752 /* CollectionViewController.m in Sources */,
 				39456CD41C480BC500B4EE47 /* ViewController.m in Sources */,
 				39456CD11C480BC500B4EE47 /* AppDelegate.m in Sources */,
+				391C79FE1C4F3D0400CAE752 /* TableViewController.m in Sources */,
 				39456D011C480C5500B4EE47 /* CalculatorCore.mm in Sources */,
 				39456CCE1C480BC500B4EE47 /* main.m in Sources */,
+				391C79F81C4F168200CAE752 /* CollectionViewCell.m in Sources */,
 				39456D051C480CD000B4EE47 /* Eval.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +571,7 @@
 				39456CF81C480BC600B4EE47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39456CF91C480BC600B4EE47 /* Build configuration list for PBXNativeTarget "Convenient CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +580,7 @@
 				39456CFB1C480BC600B4EE47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39456CFC1C480BC600B4EE47 /* Build configuration list for PBXNativeTarget "Convenient CalculatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +589,7 @@
 				39456CFE1C480BC600B4EE47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
