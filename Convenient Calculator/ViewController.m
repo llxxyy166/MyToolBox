@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CalculatorCore.h"
-#import "Yahoo.h"
+#import "TMDb.h"
 @interface ViewController ()
 @property (strong, nonatomic) CalculatorCore *core;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
