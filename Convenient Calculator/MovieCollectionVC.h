@@ -10,4 +10,7 @@
 
 @interface MovieCollectionVC : UICollectionViewController
 @property (strong, nonatomic) NSString *genreID;
+@property (nonatomic) BOOL displayUpcoming;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSMutableDictionary *imageCache;
 @end

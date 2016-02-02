@@ -37,12 +37,15 @@
 //This return an dictionary: {id = xx; page = xx; resutls = (array)}
 //where each element in the array is a dictionary
 
-+ (NSURL *)similarMoviesToMovieWithId: (NSString *)ID;
++ (NSURL *)similarMoviesToMovieWithId: (NSString *)ID
+                      forNumberOfPage: (NSUInteger)page;
 
 #define MOVIE_DETAIL_OVERVIEW @"overview"
 #define MOVIE_DETAIL_COMPANIES @"production_companies"
 #define MOVIE_DETAIL_COUNTRIES @"production_countries"
 #define MOVIE_DETAIL_VIDEO @"videos"
 + (NSURL *)getMovieDetailById: (NSString *)ID;
+
++ (NSURL *)upComingMovieListWithNumberOfPages: (NSUInteger)number;
 
 @end

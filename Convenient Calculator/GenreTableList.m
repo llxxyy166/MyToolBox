@@ -12,10 +12,19 @@
 @interface GenreTableList ()
 
 @property (strong, nonatomic) NSArray *genreArray;
-
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation GenreTableList
+
+- (void)awakeFromNib {
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"not"
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.managedObjectContext = note.userInfo[@"a"];
+                                                  }];
+}
 
 - (NSArray *)genreArray {
     if (!_genreArray) {
@@ -44,11 +53,21 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MovieCollectionVC *vc = (MovieCollectionVC *)[segue destinationViewController];
+    vc.managedObjectContext = self.managedObjectContext;
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationItem *item = sender;
+        NSLog(@"%@", item.title);
+        if ([item.title isEqualToString:@"Upcoming"]) {
+            if ([[segue destinationViewController] isKindOfClass:[MovieCollectionVC class]]) {
+                vc.displayUpcoming = YES;
+            }
+        }
+    }
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *path = [self.tableView indexPathForCell:sender];
         if (path) {
             if ([[segue destinationViewController] isKindOfClass:[MovieCollectionVC class]]) {
-                MovieCollectionVC *vc = (MovieCollectionVC *)[segue destinationViewController];
                 vc.genreID = [self.genreArray[path.row] valueForKey:GENRE_ID];
             }
         }

@@ -17,7 +17,9 @@
 
 - (void)setImage:(UIImage *)Image {
     self.poster.image = Image;
-    [self.spinner stopAnimating];
+    if (Image) {
+        [self.spinner stopAnimating];
+    }
     [self setNeedsDisplay];
 }
 

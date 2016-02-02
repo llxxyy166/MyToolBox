@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *date_language;
 @property (weak, nonatomic) IBOutlet UILabel *rate;
 @property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *movieID;
 @end

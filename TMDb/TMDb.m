@@ -30,7 +30,8 @@
     return [NSURL URLWithString:urlString];
 }
 
-+ (NSURL *)similarMoviesToMovieWithId:(NSString *)ID {
++ (NSURL *)similarMoviesToMovieWithId:(NSString *)ID
+                      forNumberOfPage: (NSUInteger)number {
         NSString *urlString = [NSString stringWithFormat:@"http://api.themoviedb.org/3/movie/%@/similar?api_key=%@", ID, KEY];
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     return [NSURL URLWithString:urlString];
@@ -38,6 +39,13 @@
 
 + (NSURL *)getMovieDetailById:(NSString *)ID {
     NSString *urlString = [NSString stringWithFormat:@"http://api.themoviedb.org/3/movie/%@?api_key=%@&append_to_response=videos", ID, KEY];
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)upComingMovieListWithNumberOfPages:(NSUInteger)number {
+    NSString *pageNumber = [NSString stringWithFormat:@"%lu", (unsigned long)number];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.themoviedb.org/3/movie/upcoming?api_key=%@&page=%@", KEY, pageNumber];
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     return [NSURL URLWithString:urlString];
 }

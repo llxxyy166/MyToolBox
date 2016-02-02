@@ -11,5 +11,8 @@
 @interface MovieDetailViewController : UIViewController 
 
 @property (strong, nonatomic) NSString *movieId;
-
+@property (strong, nonatomic) NSString *movieTittle;
+@property (strong, nonatomic) UIImage *posterImage;
+@property (strong, nonatomic) NSMutableDictionary *imageCache;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

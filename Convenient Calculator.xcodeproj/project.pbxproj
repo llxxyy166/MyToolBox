@@ -14,6 +14,11 @@
 		393ED4491C5D9BE600C00014 /* MovieCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED4481C5D9BE600C00014 /* MovieCollectionVC.m */; };
 		393ED44C1C5DA21A00C00014 /* GenreTableList.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED44B1C5DA21A00C00014 /* GenreTableList.m */; };
 		393ED44F1C5DB1C200C00014 /* MovieCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED44E1C5DB1C200C00014 /* MovieCollectionViewCell.m */; };
+		393ED4521C5FBA2B00C00014 /* MovieTrailerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED4511C5FBA2B00C00014 /* MovieTrailerVC.m */; };
+		393ED4551C5FDE8300C00014 /* MovieDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 393ED4531C5FDE8300C00014 /* MovieDataModel.xcdatamodeld */; };
+		393ED45A1C5FDF8700C00014 /* MovieData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED4571C5FDF8700C00014 /* MovieData+CoreDataProperties.m */; };
+		393ED45B1C5FDF8700C00014 /* MovieData.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED4591C5FDF8700C00014 /* MovieData.m */; };
+		393ED4A01C604E9500C00014 /* MovieCollectionHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 393ED49F1C604E9500C00014 /* MovieCollectionHistoryVC.m */; };
 		39456CCE1C480BC500B4EE47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CCD1C480BC500B4EE47 /* main.m */; };
 		39456CD11C480BC500B4EE47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CD01C480BC500B4EE47 /* AppDelegate.m */; };
 		39456CD41C480BC500B4EE47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39456CD31C480BC500B4EE47 /* ViewController.m */; };
@@ -61,6 +66,15 @@
 		393ED44B1C5DA21A00C00014 /* GenreTableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenreTableList.m; sourceTree = "<group>"; };
 		393ED44D1C5DB1C200C00014 /* MovieCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCollectionViewCell.h; sourceTree = "<group>"; };
 		393ED44E1C5DB1C200C00014 /* MovieCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionViewCell.m; sourceTree = "<group>"; };
+		393ED4501C5FBA2B00C00014 /* MovieTrailerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTrailerVC.h; sourceTree = "<group>"; };
+		393ED4511C5FBA2B00C00014 /* MovieTrailerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTrailerVC.m; sourceTree = "<group>"; };
+		393ED4541C5FDE8300C00014 /* MovieDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDataModel.xcdatamodel; sourceTree = "<group>"; };
+		393ED4561C5FDF8700C00014 /* MovieData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MovieData+CoreDataProperties.h"; sourceTree = "<group>"; };
+		393ED4571C5FDF8700C00014 /* MovieData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MovieData+CoreDataProperties.m"; sourceTree = "<group>"; };
+		393ED4581C5FDF8700C00014 /* MovieData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieData.h; sourceTree = "<group>"; };
+		393ED4591C5FDF8700C00014 /* MovieData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieData.m; sourceTree = "<group>"; };
+		393ED49E1C604E9500C00014 /* MovieCollectionHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCollectionHistoryVC.h; sourceTree = "<group>"; };
+		393ED49F1C604E9500C00014 /* MovieCollectionHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionHistoryVC.m; sourceTree = "<group>"; };
 		39456CC91C480BC500B4EE47 /* Convenient Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Convenient Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39456CCD1C480BC500B4EE47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		39456CCF1C480BC500B4EE47 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -235,14 +249,23 @@
 		39C81ACC1C5BE11A007F4146 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				393ED4501C5FBA2B00C00014 /* MovieTrailerVC.h */,
+				393ED4511C5FBA2B00C00014 /* MovieTrailerVC.m */,
 				39C81AC81C5BE109007F4146 /* MovieDetailViewController.h */,
 				39C81AC91C5BE109007F4146 /* MovieDetailViewController.m */,
 				393ED4471C5D9BE600C00014 /* MovieCollectionVC.h */,
 				393ED4481C5D9BE600C00014 /* MovieCollectionVC.m */,
+				393ED49E1C604E9500C00014 /* MovieCollectionHistoryVC.h */,
+				393ED49F1C604E9500C00014 /* MovieCollectionHistoryVC.m */,
 				393ED44D1C5DB1C200C00014 /* MovieCollectionViewCell.h */,
 				393ED44E1C5DB1C200C00014 /* MovieCollectionViewCell.m */,
 				393ED44A1C5DA21A00C00014 /* GenreTableList.h */,
 				393ED44B1C5DA21A00C00014 /* GenreTableList.m */,
+				393ED4531C5FDE8300C00014 /* MovieDataModel.xcdatamodeld */,
+				393ED4561C5FDF8700C00014 /* MovieData+CoreDataProperties.h */,
+				393ED4571C5FDF8700C00014 /* MovieData+CoreDataProperties.m */,
+				393ED4581C5FDF8700C00014 /* MovieData.h */,
+				393ED4591C5FDF8700C00014 /* MovieData.m */,
 			);
 			name = Movie;
 			sourceTree = "<group>";
@@ -386,11 +409,16 @@
 				39456CD41C480BC500B4EE47 /* ViewController.m in Sources */,
 				39456CD11C480BC500B4EE47 /* AppDelegate.m in Sources */,
 				391C79FE1C4F3D0400CAE752 /* TableViewController.m in Sources */,
+				393ED45B1C5FDF8700C00014 /* MovieData.m in Sources */,
 				39456D011C480C5500B4EE47 /* CalculatorCore.mm in Sources */,
 				39456CCE1C480BC500B4EE47 /* main.m in Sources */,
+				393ED45A1C5FDF8700C00014 /* MovieData+CoreDataProperties.m in Sources */,
+				393ED4521C5FBA2B00C00014 /* MovieTrailerVC.m in Sources */,
 				393ED44C1C5DA21A00C00014 /* GenreTableList.m in Sources */,
+				393ED4A01C604E9500C00014 /* MovieCollectionHistoryVC.m in Sources */,
 				391C79F81C4F168200CAE752 /* CollectionViewCell.m in Sources */,
 				39456D051C480CD000B4EE47 /* Eval.cpp in Sources */,
+				393ED4551C5FDE8300C00014 /* MovieDataModel.xcdatamodeld in Sources */,
 				393ED44F1C5DB1C200C00014 /* MovieCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,6 +668,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		393ED4531C5FDE8300C00014 /* MovieDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				393ED4541C5FDE8300C00014 /* MovieDataModel.xcdatamodel */,
+			);
+			currentVersion = 393ED4541C5FDE8300C00014 /* MovieDataModel.xcdatamodel */;
+			path = MovieDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 39456CC11C480BC500B4EE47 /* Project object */;
 }
