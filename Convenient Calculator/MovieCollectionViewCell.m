@@ -20,6 +20,9 @@
     if (Image) {
         [self.spinner stopAnimating];
     }
+    else {
+        [self.spinner startAnimating];
+    }
     [self setNeedsDisplay];
 }
 

@@ -33,15 +33,20 @@
 
 - (void)setMovieId:(NSString *)movieId {
     _movieId = movieId;
-    NSData *jsonRes = [NSData dataWithContentsOfURL:[TMDb getMovieDetailById:movieId]];
-    NSDictionary *res= [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
-    self.overview = res[MOVIE_DETAIL_OVERVIEW];
-    self.companies = res[MOVIE_DETAIL_COMPANIES];
-    self.countries = res[MOVIE_DETAIL_COUNTRIES];
-    NSArray *videos = res[MOVIE_DETAIL_VIDEO][@"results"];
-    if ([videos count]) {
-        self.videoKey = videos[0][@"key"];
-    }
+    dispatch_queue_t fetchQ = dispatch_queue_create("fetch", NULL);
+    dispatch_sync(fetchQ, ^{
+        NSData *jsonRes = [NSData dataWithContentsOfURL:[TMDb getMovieDetailById:movieId]];
+        NSDictionary *res= [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.overview = res[MOVIE_DETAIL_OVERVIEW];
+            self.companies = res[MOVIE_DETAIL_COMPANIES];
+            self.countries = res[MOVIE_DETAIL_COUNTRIES];
+            NSArray *videos = res[MOVIE_DETAIL_VIDEO][@"results"];
+            if ([videos count]) {
+                self.videoKey = videos[0][@"key"];
+            }
+        });
+    });
 }
 
 - (void)setSimilarMovieList:(NSArray *)similarMovieList {

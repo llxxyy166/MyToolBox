@@ -14,6 +14,7 @@
 #import "MovieCollectionHistoryVC.h"
 @interface MovieCollectionVC()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) NSArray *movieList;
+@property (nonatomic) NSUInteger itemsPerPage;
 @end
 
 @implementation MovieCollectionVC
@@ -23,10 +24,11 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     if (self.genreID) {
-        [self downLoadMovieDataWithGenreID:self.genreID];
+        [self downLoadMovieDataWithGenreID:self.genreID
+                                pageNumber:1];
     }
     if (self.displayUpcoming) {
-        [self downLoadMovieDataWithUpcoming];
+        [self downLoadMovieDataWithUpcomingWithPageNumber:1];
     }
 }
 
@@ -53,26 +55,41 @@
     return [self.movieList count];
 }
 
-- (void)downLoadMovieDataWithGenreID: (NSString *)genreId {
-    NSURL *url = [TMDb listOfMoviesWithGenreId:genreId withNumberOfPage:10];
+- (void)downLoadMovieDataWithGenreID: (NSString *)genreId
+                          pageNumber: (NSUInteger) number {
+    NSURL *url = [TMDb listOfMoviesWithGenreId:genreId withNumberOfPage:number];
     dispatch_queue_t fechQueue = dispatch_queue_create("fetch", NULL);
     dispatch_sync(fechQueue, ^{
         NSData *jsonRes = [NSData dataWithContentsOfURL:url];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.movieList = dic[MOVIE_GENRE_RESULTS];
+            if (self.movieList) {
+                NSArray *array = self.movieList;
+                self.movieList = [array arrayByAddingObjectsFromArray:dic[MOVIE_GENRE_RESULTS]] ;
+            }
+            else {
+                self.movieList = dic[MOVIE_GENRE_RESULTS];
+                self.itemsPerPage = [dic[MOVIE_GENRE_RESULTS] count];
+            }
         });
     });
 }
 
-- (void)downLoadMovieDataWithUpcoming {
+- (void)downLoadMovieDataWithUpcomingWithPageNumber: (NSUInteger)number {
     NSURL *url = [TMDb upComingMovieListWithNumberOfPages:1];
     dispatch_queue_t fechQueue = dispatch_queue_create("fetch", NULL);
     dispatch_sync(fechQueue, ^{
         NSData *jsonRes = [NSData dataWithContentsOfURL:url];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.movieList = dic[MOVIE_GENRE_RESULTS];
+            if (self.movieList) {
+                NSArray *array = self.movieList;
+                self.movieList = [array arrayByAddingObjectsFromArray:dic[MOVIE_GENRE_RESULTS]] ;
+            }
+            else {
+                self.movieList = dic[MOVIE_GENRE_RESULTS];
+                self.itemsPerPage = [dic[MOVIE_GENRE_RESULTS] count];
+            }
         });
     });
 }
@@ -83,7 +100,9 @@
     NSString *movieId = [[self.movieList[indexPath.row] valueForKey:MOVIE_GENRE_ID] stringValue];
     NSString *posterUrlString = [NSString stringWithFormat:@"%@%@%@", IMAGE_BASE_URL, IMAGE_POSTER_SIZE, movie[MOVIE_GENRE_POSTERPATH]];
     NSURL *imageUrl = [NSURL URLWithString:posterUrlString];
-
+    if ([self.imageCache count] > 20) {
+        [self.imageCache removeAllObjects];
+    }
     if (self.imageCache[movieId]) {
         mCell.image = self.imageCache[movieId];
     }
@@ -126,6 +145,14 @@
     cell.rate.text = vote;
     NSString *ID = [[self.movieList[indexPath.row] valueForKey:MOVIE_GENRE_ID] stringValue];
     cell.movieID = ID;
+    if(indexPath.row >= [self.movieList count] - 1) {
+        if (self.displayUpcoming) {
+            [self downLoadMovieDataWithUpcomingWithPageNumber:indexPath.row / self.itemsPerPage + 1];
+        }
+        else {
+            [self downLoadMovieDataWithGenreID:self.genreID pageNumber:(indexPath.row + 1) / self.itemsPerPage + 1 ];
+        }
+    }
     return cell;
 }
 
@@ -135,26 +162,30 @@
     return CGSizeMake(width, height);
 }
 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([sender isKindOfClass:[MovieCollectionViewCell class]]) {
         NSIndexPath *path = [self.collectionView indexPathForCell:sender];
         if (path) {
             MovieDetailViewController *vc = [segue destinationViewController];
             MovieCollectionViewCell *cell = sender;
+            NSLog(@"%@", cell.image);
             vc.movieId = cell.movieID;
             vc.movieTittle = cell.Title.text;
             vc.posterImage = self.imageCache[vc.movieId];
             vc.managedObjectContext = self.managedObjectContext;
             if (![self fetchWithId:cell.movieID]) {
-                NSManagedObjectContext *contex = self.managedObjectContext;
-                MovieData *movie = [NSEntityDescription insertNewObjectForEntityForName:@"MovieData" inManagedObjectContext:contex];
-                movie.name = vc.movieTittle;
-                movie.idNumber = cell.movieID;
-                movie.rate = cell.date_language.text;
-                movie.timeAndLan = cell.rate.text;
-                movie.posterImage = UIImagePNGRepresentation(self.imageCache[vc.movieId]);
-                [contex save: NULL];
-                //NSLog(@"%@", movie);
+                dispatch_queue_t saveQueue = dispatch_queue_create("save", NULL);
+                dispatch_sync(saveQueue, ^{
+                    NSManagedObjectContext *contex = self.managedObjectContext;
+                    MovieData *movie = [NSEntityDescription insertNewObjectForEntityForName:@"MovieData" inManagedObjectContext:contex];
+                    movie.name = vc.movieTittle;
+                    movie.idNumber = cell.movieID;
+                    movie.rate = cell.date_language.text;
+                    movie.timeAndLan = cell.rate.text;
+                    movie.posterImage = UIImagePNGRepresentation(self.imageCache[vc.movieId]);
+                    [contex save: NULL];
+                });
             }
         }
     }
