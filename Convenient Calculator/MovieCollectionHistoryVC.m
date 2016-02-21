@@ -62,6 +62,9 @@
     }
     self.list = nil;
     [self.collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [managedObjectContext save:NULL];
+    });
 }
 
 

@@ -33,19 +33,16 @@
 
 - (void)setMovieId:(NSString *)movieId {
     _movieId = movieId;
-    dispatch_queue_t fetchQ = dispatch_queue_create("fetch", NULL);
-    dispatch_sync(fetchQ, ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         NSData *jsonRes = [NSData dataWithContentsOfURL:[TMDb getMovieDetailById:movieId]];
         NSDictionary *res= [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.overview = res[MOVIE_DETAIL_OVERVIEW];
-            self.companies = res[MOVIE_DETAIL_COMPANIES];
-            self.countries = res[MOVIE_DETAIL_COUNTRIES];
-            NSArray *videos = res[MOVIE_DETAIL_VIDEO][@"results"];
-            if ([videos count]) {
-                self.videoKey = videos[0][@"key"];
-            }
-        });
+        self.overview = res[MOVIE_DETAIL_OVERVIEW];
+        self.companies = res[MOVIE_DETAIL_COMPANIES];
+        self.countries = res[MOVIE_DETAIL_COUNTRIES];
+        NSArray *videos = res[MOVIE_DETAIL_VIDEO][@"results"];
+        if ([videos count]) {
+            self.videoKey = videos[0][@"key"];
+        }
     });
 }
 
@@ -82,17 +79,18 @@
             vc.movieTittle = cell.Title.text;
             vc.posterImage = self.imageCache[vc.movieId];
             vc.managedObjectContext = self.managedObjectContext;
-            if (![self fetchWithId:cell.movieID]) {
-                NSManagedObjectContext *contex = self.managedObjectContext;
-                MovieData *movie = [NSEntityDescription insertNewObjectForEntityForName:@"MovieData" inManagedObjectContext:contex];
-                movie.name = vc.movieTittle;
-                movie.idNumber = cell.movieID;
-                movie.rate = cell.date_language.text;
-                movie.timeAndLan = cell.rate.text;
-                movie.posterImage = UIImagePNGRepresentation(self.imageCache[vc.movieId]);
-                [contex save: NULL];
-                //NSLog(@"%@", movie);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self fetchWithId:cell.movieID]) {
+                    NSManagedObjectContext *contex = self.managedObjectContext;
+                    MovieData *movie = [NSEntityDescription insertNewObjectForEntityForName:@"MovieData" inManagedObjectContext:contex];
+                    movie.name = vc.movieTittle;
+                    movie.idNumber = cell.movieID;
+                    movie.rate = cell.date_language.text;
+                    movie.timeAndLan = cell.rate.text;
+                    movie.posterImage = UIImagePNGRepresentation(self.imageCache[vc.movieId]);
+                    [contex save: NULL];
+                }
+            });
         }
     }
     else {
@@ -103,13 +101,10 @@
 
 - (void)downLoadSimilarMovieList {
     NSURL *url = [TMDb similarMoviesToMovieWithId:self.movieId forNumberOfPage:1];
-    dispatch_queue_t fechQueue = dispatch_queue_create("fetch", NULL);
-    dispatch_sync(fechQueue, ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         NSData *jsonRes = [NSData dataWithContentsOfURL:url];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonRes options:0 error:NULL];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.similarMovieList = dic[MOVIE_GENRE_RESULTS];
-        });
+        self.similarMovieList = dic[MOVIE_GENRE_RESULTS];
     });
 }
 
@@ -140,7 +135,7 @@
     }
     else {
         dispatch_queue_t downloadQueue = dispatch_queue_create("download", NULL);
-        dispatch_sync(downloadQueue, ^{
+        dispatch_async(downloadQueue, ^{
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

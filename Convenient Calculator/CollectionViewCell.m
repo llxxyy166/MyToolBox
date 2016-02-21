@@ -28,7 +28,9 @@ static NSString * const keyForSavedPlaces = @"savedPlaces";
 - (void)setWoeid:(NSInteger)Woeid {
     _Woeid = Woeid;
     NSString *woeidS = [NSString stringWithFormat:@"%ld", (long)Woeid];
-    self.WeatherLabel.text = [self fetchWeatherWithWoeid:woeidS];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.WeatherLabel.text = [self fetchWeatherWithWoeid:woeidS];
+    });
     //[self sendSubviewToBack:self.dayNightView];
     
 }

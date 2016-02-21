@@ -169,14 +169,12 @@
         if (path) {
             MovieDetailViewController *vc = [segue destinationViewController];
             MovieCollectionViewCell *cell = sender;
-            NSLog(@"%@", cell.image);
             vc.movieId = cell.movieID;
             vc.movieTittle = cell.Title.text;
             vc.posterImage = self.imageCache[vc.movieId];
             vc.managedObjectContext = self.managedObjectContext;
             if (![self fetchWithId:cell.movieID]) {
-                dispatch_queue_t saveQueue = dispatch_queue_create("save", NULL);
-                dispatch_sync(saveQueue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
                     NSManagedObjectContext *contex = self.managedObjectContext;
                     MovieData *movie = [NSEntityDescription insertNewObjectForEntityForName:@"MovieData" inManagedObjectContext:contex];
                     movie.name = vc.movieTittle;
